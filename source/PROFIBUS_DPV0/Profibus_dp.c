@@ -83,10 +83,12 @@ profibus_sm = INT_HAMDLE;
 status_t PROFIBUS_manager(uint8_t* din_Buffer, uint8_t* dout_Buffer, uint16_t irr){
 	if (profibus_sm == INT_HAMDLE){
 		profibus_sm = IDLE;
-		if (Get_interrupte_Req_Reg() & S_BaudRate_detect){
+		uint16_t IRR = Get_interrupte_Req_Reg();
+
+		if (IRR & S_BaudRate_detect){
 			Ack_Interrupte(S_BaudRate_detect);
 		}
-		if(Get_interrupte_Req_Reg() & S_DX_Out){
+		if(IRR & S_DX_Out){
 			if (dx_err == first_DX){
 				DXOut_Handeler();
 				dx_err = Normal_DX;
@@ -97,12 +99,12 @@ status_t PROFIBUS_manager(uint8_t* din_Buffer, uint8_t* dout_Buffer, uint16_t ir
 				DXOut_Handeler();
 			}
 		}
-		if(Get_interrupte_Req_Reg() & S_New_Prm_Data){
+		if(IRR & S_New_Prm_Data){
 			Set_Prm_Handler();
 		}
-		if(Get_interrupte_Req_Reg() & S_New_Cfg_Data)
+		if(IRR & S_New_Cfg_Data)
 			Chk_Cfg_Handeler();
-		if(Get_interrupte_Req_Reg() & S_Go_Leave_DATA_EXCH){
+		if(IRR & S_Go_Leave_DATA_EXCH){
 			Ack_Interrupte(S_Go_Leave_DATA_EXCH);
 			S_Go_Leave_DATA_EXCH_Callback();
 			if (WAIT_PRM == Get_DP_state()){
@@ -110,10 +112,10 @@ status_t PROFIBUS_manager(uint8_t* din_Buffer, uint8_t* dout_Buffer, uint16_t ir
 				Set_VPC3_Start();
 			}
 		 }
-		 if(Get_interrupte_Req_Reg() & S_WD_DP_CONTROL_Timeout){
+		 if(IRR & S_WD_DP_CONTROL_Timeout){
 			 Ack_Interrupte(S_WD_DP_CONTROL_Timeout);
 		  }
-		 if (Get_interrupte_Req_Reg() & S_Diag_Buffer_Changed){
+		 if (IRR & S_Diag_Buffer_Changed){
 			 Ack_Interrupte(S_Diag_Buffer_Changed);
 		 }
 		 return 1;
