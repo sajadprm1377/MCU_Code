@@ -21,9 +21,9 @@ typedef enum{
 }Special_Clear_Mode;
 
 typedef enum{
-	Error_User_Prm_Data,
-	Succrssful_User_Prm_Data
-}Status_Set_Prm;
+	Error_PRM,
+	Succrssful_PRM
+}Status_Prm;
 
 typedef struct{
 	uint16_t Ident_Number;
@@ -41,7 +41,7 @@ typedef struct{
 
 void Enable_Fail_Safe_Mode(Special_Clear_Mode);		/*VPC3+S will accept data telegrams with data unit = 0 */
 void Set_Prm_Initial(Prm_specific*, User_Prm_Data*);
-void Set_Prm_Handler();
+Status_Prm Set_Prm_Handler();
 void Set_Prm_Callback(uint8_t*, uint8_t);
 Prm_Status User_Prm_Data_Okay_Cmd(void);
 Prm_Status User_Prm_Data_Not_Okay_Cmd(void);

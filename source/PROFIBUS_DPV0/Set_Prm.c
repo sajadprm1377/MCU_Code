@@ -23,18 +23,21 @@ uint8_t Check_Prm_buffer(uint8_t* Prm_buffer_from_Master, uint8_t* self_Prm_Buff
 }
 
 
-void Set_Prm_Handler(){
+Status_Prm Set_Prm_Handler(){
 	Set_Res_User_WD();
 	uint8_t length = vpc3_Read_Byte(R_Len_Prm_Data);
 	uint8_t *prm_buffer = malloc(length);
 	uint16_t Address = (vpc3_Read_Byte(R_Prm_Buf_Ptr))<<3;
 	vpc3_Read_Array(Address, prm_buffer, length);
-	if(Check_Prm_buffer(prm_buffer, User_Prm_Data_buffer, length))
+	if(Check_Prm_buffer(prm_buffer, User_Prm_Data_buffer, length)){
 //		Set_Prm_Callback(prm_buffer, length);
 		while(User_Prm_Finished != User_Prm_Data_Okay_Cmd());
-	else
+		return Succrssful_PRM;
+	}
+	else{
 		while(User_Prm_Finished != User_Prm_Data_Not_Okay_Cmd());
-
+		return Error_PRM;
+	}
 	free(prm_buffer);
 }
 
