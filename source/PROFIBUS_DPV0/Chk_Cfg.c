@@ -7,8 +7,9 @@
 
 #include "Chk_Cfg.h"
 
-extern uint8_t user_cfg[2];
-
+//extern uint8_t user_cfg[2];
+static uint8_t User_Cfg_Data_Len;
+uint8_t User_Cfg_Data_buffer[];
 Cfg_Status User_Cfg_Data_Okay_Cmd(void){
 	return ((vpc3_Read_Byte(User_Cfg_Data_Okay))&3);
 }
@@ -16,9 +17,13 @@ Cfg_Status User_Cfg_Data_Not_Okay_Cmd(void){
 	return ((vpc3_Read_Byte(User_Cfg_Data_Not_Okay))&3);
 }
 
-void Chk_Cfg_Initial(Chk_Cfg_Setting* ccs){
+void Chk_Cfg_Initial(Chk_Cfg_Setting* ccs, User_Cfg_Data* ucfg){
 	vpc3_Write_Byte(R_Cfg_Buf_Ptr, ccs->Seg_Base_Cfg_Buffer);
 	vpc3_Write_Byte(R_Read_Cfg_Buf_Ptr, ccs->Seg_Base_Read_Cfg_Buffer);
+	User_Cfg_Data_Len = ucfg->Length;
+	for(int i=0; i<User_Cfg_Data_Len ; i++)
+		*(User_Cfg_Data_buffer + i) = *(ucfg->Buffer + i);
+
 }
 uint8_t Check_Cfg_buffer(uint8_t* Cfg_buffer_from_Master, uint8_t* self_cfg_buffer, uint8_t length_buffer){
 	for(uint8_t i=0; i<length_buffer; i++){
@@ -34,7 +39,7 @@ void Chk_Cfg_Handeler(void){
 	uint8_t add = vpc3_Read_Byte(R_Cfg_Buf_Ptr)<<3;
 	vpc3_Read_Array(add, cfg_buffer, length);
 //	Chk_Cfg_Callback(cfg_buffer, length);
-	if(Check_Cfg_buffer(cfg_buffer, user_cfg, length))
+	if(Check_Cfg_buffer(cfg_buffer, User_Cfg_Data_buffer, length))
 		while(User_Cfg_Finished != User_Cfg_Data_Okay_Cmd());
 	else
 		while(User_Cfg_Finished != User_Cfg_Data_Not_Okay_Cmd());

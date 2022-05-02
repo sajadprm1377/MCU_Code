@@ -9,7 +9,8 @@
 static GPIO_Type* GPIO__Interrupt;
 static PROFIBUS_SM profibus_sm = IDLE;
 static DX_ERR dx_err = first_DX;
-extern uint8_t user_prm[5];
+
+//extern uint8_t user_prm[5];
 
 void vpc3_Initial(void){
 //    Config_Interrupt_PIN(PORT_Interrupt, GPIOD, PIN_Interrupt);
@@ -34,7 +35,10 @@ void vpc3_Initial(void){
     Cfg_Config.Seg_Base_Cfg_Buffer 		= Ptr_Cfg_Buffer;
     Cfg_Config.Seg_Base_Read_Cfg_Buffer = Ptr_Read_Cfg_Buffer;
 
-    Chk_Cfg_Initial(&Cfg_Config);
+    User_Cfg_Data ucfg;
+    ucfg.Buffer = user_cfg;
+    ucfg.Length = 2;
+    Chk_Cfg_Initial(&Cfg_Config, &ucfg);
 	Enable_Interrupte(Interrupt_Mask_Disable);
 	Config_Aux_Buffer(Len_Aux1, Len_Aux2, Ptr_Aux1, Ptr_Aux2, Buf_Select_Aux);
 	Config_Cfg_Buffer(2, 40, 2, 41);

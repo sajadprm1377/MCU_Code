@@ -53,7 +53,13 @@ typedef union{
 	uint8_t cfg_data;
 }Cfg_Compact_Format;
 
-void Chk_Cfg_Initial(Chk_Cfg_Setting* );
+
+typedef struct{
+	uint8_t Length;
+	uint8_t* Buffer;
+}User_Cfg_Data;
+
+void Chk_Cfg_Initial(Chk_Cfg_Setting*, User_Cfg_Data*);
 void Config_Chk_Cfg_Buffer(uint8_t Base_Addr, uint8_t lengt);
 //status_t Check_Prm_Buffer();
 Cfg_Status User_Cfg_Data_Okay_Cmd(void);
