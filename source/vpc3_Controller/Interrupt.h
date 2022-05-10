@@ -79,8 +79,6 @@ typedef union {
 
 
 
-void Config_Interrupt_PIN(PORT_Type*, GPIO_Type*, uint32_t);
-void Default_Config_Interrupt_PIN(void);
 
 void Ack_Interrupte(Set_Interrupte);
 void Enable_Interrupte(Clear_Mask);   // Mask Disable

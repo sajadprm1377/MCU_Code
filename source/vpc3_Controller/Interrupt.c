@@ -9,23 +9,6 @@
 
 static uint16_t last_Mask_Reg  = C_Disable;
 
-void Default_Config_Interrupt_PIN(void){
-	CLOCK_EnableClock(kCLOCK_PortD);
-
-	gpio_pin_config_t X_INT_config = {
-		.pinDirection = kGPIO_DigitalInput,
-	    .outputLogic = 0U
-	};
-	/* Initialize GPIO functionality on pin PTD2 (pin 59)  */
-	GPIO_PinInit(GPIOD, X_INT_PIN, &X_INT_config);
-
-    /* PORTD2 (pin 59) is configured as PTD2 */
-    PORT_SetPinMux(PORTD, X_INT_PIN, kPORT_MuxAsGpio);
-    /* Interrupt configuration on PORTD2 (pin 59): Interrupt on rising edge */
-    PORT_SetPinInterruptConfig(PORTD, X_INT_PIN, kPORT_InterruptRisingEdge);
-    EnableIRQ(GPIOD_IRQN);
-}
-
 void All_Interrupt_Disable(void){
 	uint8_t mask[2] = {0xff, 0xff};
 	vpc3_Write_Array(Int_Mask_Reg_L, mask, 2);
