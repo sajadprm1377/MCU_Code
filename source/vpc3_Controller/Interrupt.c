@@ -26,12 +26,6 @@ void Default_Config_Interrupt_PIN(void){
     EnableIRQ(GPIOD_IRQN);
 }
 
-//void Config_Mask_Reg(Int_Req_Reg imr){
-////	uint8_t mask[2];
-////	vpc3_Read_Array(Int_Mask_Reg_L, mask, 2);
-//	vpc3_Write_Array(Int_Mask_Reg_L, imr.Byte, 2);
-//}
-
 void All_Interrupt_Disable(void){
 	uint8_t mask[2] = {0xff, 0xff};
 	vpc3_Write_Array(Int_Mask_Reg_L, mask, 2);
