@@ -24,18 +24,7 @@ typedef enum{
 	IDLE,
 	INT_HAMDLE
 }PROFIBUS_SM;
-typedef struct{
-	PORT_Type* port_Interrupt;
-	GPIO_Type* gpio_Interrupt;
-	uint32_t Pin_Interrupt;
-}Interrupt_Pin_Config;
 
-typedef struct{
-	SPI_Type* SPI_Base_Addr;
-	uint8_t Slave_Address;
-	RAM_Size RAM_size;
-
-}vpc3_specification;
 void vpc3_Initial(void);
 
 void vpc3_Interrupt_Handler(void);
