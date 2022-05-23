@@ -12,4 +12,8 @@
 #include "vpc3_Controller/Interrupt.h"
 
 
+void Diag_Buffer_Handle(void);
+
+void Read_Diagnosis_Buffer(uint8_t*);
+
 #endif /* PROFIBUS_DPV0_SLAVE_DIAG_H_ */

@@ -14,9 +14,6 @@ void All_Interrupt_Disable(void){
 	vpc3_Write_Array(Int_Mask_Reg_L, mask, 2);
 }
 
-
-
-
 void Ack_Interrupte(Set_Interrupte interrupte_vector){
 	uint16_t address;
 	uint8_t data;

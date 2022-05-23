@@ -9,10 +9,10 @@
 #define PROFIBUS_DP_H_
 
 //#include "MCU_Cfg/Port.h"
-#include "Chk_Cfg.h"
-#include "Set_Prm.h"
-#include "DATA_Exchange.h"
-#include "Slave_Diag.h"
+#include "PROFIBUS_DPV0/Chk_Cfg.h"
+#include "PROFIBUS_DPV0/Set_Prm.h"
+#include "PROFIBUS_DPV0/DATA_Exchange.h"
+#include "PROFIBUS_DPV0/Slave_Diag.h"
 #include "conf.h"
 //#define GPIOD_IRQHANDLER vpc3_Interrupt
 

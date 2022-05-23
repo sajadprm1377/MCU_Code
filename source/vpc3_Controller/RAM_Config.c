@@ -59,13 +59,14 @@ void Config_Aux_Buffer(uint8_t len1, uint8_t len2, uint8_t Ptr1, uint8_t Ptr2, u
 	Aux_buffer.conf.Aux_Buf_Ptr2 = Ptr2;
 	vpc3_Write_Array(R_Len_Cntrl_Buf1, Aux_buffer.pack, 5);
 }
-void Config_SSA_Buffer(uint8_t len, uint8_t Ptr){
-	SAP_SSA_Buffer SSA_buffer;
-	SSA_buffer.conf.SSA_Buf_Ptr = Ptr;
-	SSA_buffer.conf.Len_SSA_Data = len ;
-	vpc3_Write_Array(R_Len_SSA_Data, SSA_buffer.pack, 2);
 
-}
+//void Config_SSA_Buffer(uint8_t len, uint8_t Ptr){
+//	SAP_SSA_Buffer SSA_buffer;
+//	SSA_buffer.conf.SSA_Buf_Ptr = Ptr;
+//	SSA_buffer.conf.Len_SSA_Data = len ;
+//	vpc3_Write_Array(R_Len_SSA_Data, SSA_buffer.pack, 2);
+//}
+
 void Config_Prm_Buffer(uint8_t len, uint8_t Ptr){
 	SAP_Prm_Buffer Prm_buffer;
 	Prm_buffer.conf.Len_Prm_Data = len;

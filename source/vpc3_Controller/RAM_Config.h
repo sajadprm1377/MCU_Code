@@ -14,8 +14,6 @@ extern "C" {
 #endif
 
 #include "vpc3_drive.h"
-//#include "Interrupt.h"
-
 
 typedef enum{
 	_2kByte = 0,
@@ -83,16 +81,6 @@ typedef union {
 	}configBit;
 	uint8_t Packet_8Bit;
 }Mode_Reg_3;
-
-//typedef struct{
-//	uint16_t Ident_Number;
-//	uint8_t  Slave_Address;
-//	uint8_t  MinTsdr;
-//	uint16_t R_User_WD_Value;
-//	RAM_Size ram_size;
-//	uint8_t   WD_BAUD_CONTROL_val;
-//}vpc3_specific;
-
 
 typedef union {
 	struct {
@@ -171,20 +159,17 @@ typedef union {
 	uint8_t pack[4];
 }SAP_Cfg_Buffer;
 
-typedef struct{
-	SAP_Dout_Buffer 	Dout_Buffer;
-	SAP_Din_Buffer  	Din_Buffer;
-	SAP_DXBout_Buffer 	Dxbout_Buffer;
-	SAP_Diag_Buffer 	Diag_Buffer;
-	SAP_Aux_Buffer  	Aux_Buffer;
-	SAP_SSA_Buffer  	SSA_Buffer;
-	SAP_Prm_Buffer  	Prm_Buffer;
-	SAP_Cfg_Buffer		Cfg_Buffer;
-}SAP_Buffer;
-typedef struct{
-	uint8_t Slave_Address;
+//typedef struct{
+//	SAP_Dout_Buffer 	Dout_Buffer;
+//	SAP_Din_Buffer  	Din_Buffer;
+//	SAP_DXBout_Buffer 	Dxbout_Buffer;
+//	SAP_Diag_Buffer 	Diag_Buffer;
+//	SAP_Aux_Buffer  	Aux_Buffer;
+//	SAP_SSA_Buffer  	SSA_Buffer;
+//	SAP_Prm_Buffer  	Prm_Buffer;
+//	SAP_Cfg_Buffer		Cfg_Buffer;
+//}SAP_Buffer;
 
-}x;
 
 typedef enum{
 	disable = 0,
@@ -215,7 +200,7 @@ void Set_Group_Select_Reg(uint8_t);
 void Set_WD_BAUD_CONTROL_Val(uint8_t);
 void Set_R_User_WD_Value(uint16_t);
 void Config_Aux_Buffer(uint8_t len1, uint8_t len2, uint8_t Ptr1, uint8_t Ptr2, uint8_t Buf_Select);
-void Config_SSA_Buffer(uint8_t len, uint8_t Ptr);
+//void Config_SSA_Buffer(uint8_t len, uint8_t Ptr);
 void Config_Prm_Buffer(uint8_t len, uint8_t Ptr);
 void Config_Cfg_Buffer(uint8_t len, uint8_t Ptr, uint8_t read_Cfg_len, uint8_t read_cfg_ptr);
 void Config_Diag_Buffer(uint8_t len1, uint8_t Ptr1,uint8_t len2, uint8_t Ptr2);

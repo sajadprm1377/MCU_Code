@@ -83,9 +83,6 @@ typedef union {
 void Ack_Interrupte(Set_Interrupte);
 void Enable_Interrupte(Clear_Mask);   // Mask Disable
 
-
-
-//void Config_Mask_Reg(Int_Req_Reg);
 void All_Interrupt_Disable(void);
 
 #endif /* INTERRUPT_H_ */

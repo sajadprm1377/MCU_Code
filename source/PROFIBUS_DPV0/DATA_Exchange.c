@@ -64,7 +64,7 @@ void Put_Input_Data(uint8_t* Din_Buffer){
 		add = 0x00;
 	}
 	if (add)
-		vpc3_Write_Array(add, Din_Buffer, 2);
+		vpc3_Write_Array(add, Din_Buffer, input_data_len);
 
 }
 void Get_Output_Data(uint8_t* Dout_Buffer){
@@ -85,5 +85,5 @@ void Get_Output_Data(uint8_t* Dout_Buffer){
 		add = 0x00;
 	}
 	if(add)
-		vpc3_Read_Array(add, Dout_Buffer, 2);
+		vpc3_Read_Array(add, Dout_Buffer, output_data_len);
 }

@@ -11,6 +11,7 @@
 #include "vpc3_Controller/Status.h"
 #include "vpc3_Controller/RAM_Config.h"
 #include "vpc3_Controller/Interrupt.h"
+#include "conf.h"
 //#include "Profibus_dp.h"
 
 typedef enum{
@@ -38,6 +39,8 @@ typedef enum{
 	U = 0b001100,
 	F = 0b11000000
 }Buffer_position;
+
+
 
 
 

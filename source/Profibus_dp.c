@@ -9,8 +9,18 @@
 static GPIO_Type* GPIO__Interrupt;
 static PROFIBUS_SM profibus_sm = IDLE;
 static DX_ERR dx_err = first_DX;
+extern uint8_t User_Cfg[User_Cfg_Data_len];
+uint8_t user_prm[5] 	= {1,2,3,4};
+uint8_t User_Cfg[User_Cfg_Data_len] = {33,17};
 
-//extern uint8_t user_prm[5];
+//uint16_t Interrupt_Mask_Disable =  C_BaudRate_detect&
+//							       C_New_Prm_Data &
+//							       C_New_Cfg_Data &
+//							       C_DX_Out &
+//							       C_Go_Leave_DATA_EXCH &
+//							       C_WD_DP_CONTROL_Timeout&
+//							       C_Diag_Buffer_Changed;
+
 
 void vpc3_Initial(void){
 //    Config_Interrupt_PIN(PORT_Interrupt, GPIOD, PIN_Interrupt);
@@ -21,13 +31,13 @@ void vpc3_Initial(void){
 	Set_Slave_Address(Slave_Address);
 	Set_RAM_Size(RAM_size);
 	Prm_specific prm;
-	prm.Ident_Number = Ident_Num;
-	prm.Min_Tsdr = Min_Tsdr;
-	prm.R_User_WD_Value = R_User_WD_Value;
-	prm.Seg_Base_Prm_Buffer = Seg_Base_Prm_Buffer;
+	prm.Ident_Number = ident_num;
+	prm.Min_Tsdr = min_Tsdr;
+	prm.R_User_WD_Value = R_user_WD_value;
+	prm.Seg_Base_Prm_Buffer = seg_base_prm_buffer;
 
 	User_Prm_Data upd;
-	upd.Length = User_Prm_Data_len;
+	upd.Length = user_prm_data_len;
 	upd.Buffer = user_prm;
 	Set_Prm_Initial(&prm, &upd);
 
@@ -36,20 +46,21 @@ void vpc3_Initial(void){
     Cfg_Config.Seg_Base_Read_Cfg_Buffer = Ptr_Read_Cfg_Buffer;
 
     User_Cfg_Data ucfg;
-    ucfg.Buffer = user_cfg;
+    ucfg.Buffer = User_Cfg;
     ucfg.Length = 2;
     Chk_Cfg_Initial(&Cfg_Config, &ucfg);
+
+
+
 	Enable_Interrupte(Interrupt_Mask_Disable);
 	Config_Aux_Buffer(Len_Aux1, Len_Aux2, Ptr_Aux1, Ptr_Aux2, Buf_Select_Aux);
 	Config_Cfg_Buffer(2, 40, 2, 41);
 	Config_Dout_Buffer(2, 20, 21, 22);
-	Config_Din_Buffer(2, 23, 24, 25);
+	Config_Din_Buffer(input_data_len, 23, 24, 25);
 	Config_Diag_Buffer(6, 60, 6, 61);
     Set_Res_User_WD();
     Set_VPC3_Start();
     Set_EOI();
-//    Config_Interrupt_PIN(PORT_Interrupt, GPIOD, PIN_Interrupt);
-//    profibus_sm = INT_HAMDLE;
 }
 
 
